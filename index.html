@@ -56,15 +56,13 @@
   .gift-box{font-size:5rem; cursor:pointer; animation:wiggle 1.6s ease-in-out infinite; user-select:none;}
   @keyframes wiggle{0%,100%{transform:rotate(0deg);}25%{transform:rotate(-8deg);}75%{transform:rotate(8deg);}}
   .tap-hint{margin-top:10px; opacity:.8; font-size:.95rem;}
-  .final-text{font-size:2.1rem; font-weight:800; color:var(--gold); line-height:1.4;
-    text-shadow:0 0 20px rgba(255,209,102,.6); animation:pop .5s ease;}
-  @keyframes pop{0%{transform:scale(.3); opacity:0;}70%{transform:scale(1.15);}100%{transform:scale(1); opacity:1;}}
-  .bday-photo{
-    width:100%; max-width:340px; aspect-ratio:1/1; border-radius:20px; object-fit:cover; margin:0 auto 20px;
-    border:4px solid var(--gold); box-shadow:0 0 30px rgba(255,209,102,.5); display:block;
-    animation:pop .6s ease;
+  .final-text{
+    font-size:2.4rem; font-weight:900; line-height:1.5; letter-spacing:1px;
+    color:var(--gold); text-shadow:0 0 20px rgba(255,209,102,.6);
+    animation:zoomOut .8s ease-out;
   }
-  .music-note{margin-top:14px; font-size:.9rem; opacity:.75;}
+  @keyframes zoomOut{0%{transform:scale(3); opacity:0;}60%{transform:scale(.9); opacity:1;}100%{transform:scale(1); opacity:1;}}
+  .sparkle{font-size:2.2rem; display:inline-block;}
   .confetti{position:fixed; top:-10px; width:8px; height:14px; border-radius:2px; z-index:5;
     animation:fall linear forwards;}
   @keyframes fall{to{transform:translateY(110vh) rotate(600deg); opacity:.3;}}
@@ -121,10 +119,10 @@
 </div>
 
 <div id="screen-final" class="screen">
-  <img class="bday-photo" src="photo.jpg" alt="Birthday">
-  <div class="final-text" id="final-msg">HAPPY BIRTHDAY<br>SONADI 🎂🎉</div>
-  <div class="music-note">🎵 gaan bajche...</div>
-  <audio id="bday-music" src="music.mp3" loop></audio>
+<div id="screen-final" class="screen">
+  <div><span class="sparkle">✨</span></div>
+  <div class="final-text" id="final-msg">HAPPY BIRTHDAY<br>ACHAL 🎉🎂</div>
+  <div><span class="sparkle">✨</span></div>
 </div>
 
 <script>
@@ -190,9 +188,6 @@ function startVideo(){
 function openGift(){
   switchScreen('screen-final');
   burstConfetti();
-  const music = document.getElementById('bday-music');
-  music.volume = 0.8;
-  music.play().catch(()=>{ /* if blocked, user can tap photo/text to retry */ });
 }
 
 function burstConfetti(){
