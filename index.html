@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Happy Birthday Surprise</title>
 <style>
   :root{
@@ -111,14 +114,6 @@
   <div class="warn">🔊 সাউন্ড অন করে, স্কিপ না করে পুরো ভিডিওটা দেখো — শেষে একটা সারপ্রাইজ আছে!</div>
 </div>
 
-<div id="screen-gift" class="screen">
-  <h1>ভিডিও শেষ! 🎬</h1>
-  <p class="sub">এখনই ট্যাব বন্ধ কোরো না... নিচের গিফট বক্সে ট্যাপ করো 👇</p>
-  <div class="gift-box" onclick="openGift()">🎁</div>
-  <div class="tap-hint">← এখানে ট্যাপ করো</div>
-</div>
-
-<div id="screen-final" class="screen">
 <div id="screen-final" class="screen">
   <div><span class="sparkle">✨</span></div>
   <div class="final-text" id="final-msg">HAPPY BIRTHDAY<br>ACHAL 🎉🎂</div>
@@ -128,7 +123,7 @@
 <script>
 // ===== TIME LOCK =====
 // Eikhane target unlock date/time set koro (year-month-day T hour:minute:second)
-const UNLOCK_AT = new Date('2020-01-01T00:00:00'); // TEST MODE: already unlocked
+const UNLOCK_AT = new Date('2026-09-27T00:00:00');
 
 function pad(n){ return n.toString().padStart(2,'0'); }
 
@@ -178,16 +173,11 @@ vid.addEventListener('timeupdate', ()=>{ if(!vid.seeking) lastTime = vid.current
 vid.addEventListener('seeking', ()=>{
   if(vid.currentTime > lastTime + 1){ vid.currentTime = lastTime; }
 });
-vid.addEventListener('ended', ()=>{ switchScreen('screen-gift'); });
+vid.addEventListener('ended', ()=>{ switchScreen('screen-final'); burstConfetti(); });
 
 function startVideo(){
   document.getElementById('play-btn').classList.add('hidden-btn');
   vid.play();
-}
-
-function openGift(){
-  switchScreen('screen-final');
-  burstConfetti();
 }
 
 function burstConfetti(){
